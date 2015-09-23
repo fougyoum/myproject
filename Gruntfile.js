@@ -2,6 +2,28 @@ module.exports = function(grunt) {
   // Project configuration
   grunt.initConfig({
    pkg: grunt.file.readJSON('package.json'),
+   connect: {
+      dev: {
+        options: {
+          port: 8000,
+          base: './dist/',
+          keepalive: true
+        }
+      }
+    },
+    assemble: {
+      options: { layout: 'page.hbs', layoutdir: './src/bonnet/layouts/', partials: './src/bonnet/partials/**/*.hbs' },
+      //posts: { files: [{ cwd: './src/content/', dest: './dist/', expand: true, src: ['**/*.hbs', '!_pages/**/*.hbs'] }, { cwd: './src/content/_pages/', dest: './dist/', expand: true, src: '**/*.hbs' }] }
+    },
+
+    sass: {
+      dist: {
+        files: {
+          './build/style/main.css': './src/style/main.scss'
+        }
+      }
+    },
+
     uglify: {
      options: {
        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
@@ -13,12 +35,16 @@ module.exports = function(grunt) {
        dest : './build/build.js'
      }
    }
+
  });
 
- // Load the plugin that provides the "uglify" task.
+ // load plugins in package.json
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+  grunt.registerTask('default', ['assemble','sass','uglify','connect']);
 
 };
