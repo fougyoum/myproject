@@ -1,0 +1,19 @@
+{
+  "name": "myproject",
+  "version": "1.0.0",
+  "description": "this is my project",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fougyoum/myproject.git"
+  },
+  "author": "Phuong-Dung Hoang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fougyoum/myproject/issues"
+  },
+  "homepage": "https://github.com/fougyoum/myproject#readme"
+}
